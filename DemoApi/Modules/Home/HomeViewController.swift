@@ -171,6 +171,7 @@ extension HomeViewController: UITableViewDataSource,UITableViewDelegate,UIScroll
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! DataCell
         cell.selectionStyle = .none
         cell.swSwitch.tag = indexPath.row
+        
         cell.swSwitch.isOn = false
         
         if(self.selectedIndexes.contains(indexPath.row))
@@ -179,11 +180,8 @@ extension HomeViewController: UITableViewDataSource,UITableViewDelegate,UIScroll
         }
         
         cell.swSwitch.isEnabled = false
-//        cell.swSwitch.removeTarget(self, action: nil, for: UIControl.Event.valueChanged)
-//        cell.swSwitch.addTarget(self, action: #selector(self.setSelected(_:)), for: UIControl.Event.valueChanged)
         
         let objData = self.heatsArray[indexPath.row]
-        
         cell.lblTitle.text = objData.title
         
         let strDate = objData.createdAt.replacingOccurrences(of: "Z", with: "")

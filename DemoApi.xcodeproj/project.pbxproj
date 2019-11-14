@@ -132,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				088FE5F4237D79170044E009 /* Home */,
-				088FE5F6237D79170044E009 /* Common */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -143,13 +142,6 @@
 				088FE5F5237D79170044E009 /* HomeViewController.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		088FE5F6237D79170044E009 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		088FE5F7237D79170044E009 /* Views */ = {

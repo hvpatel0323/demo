@@ -34,25 +34,6 @@ extension Date {
 }
 
 
-extension NSAttributedString {
-    func heightWithWidth(_ width: CGFloat) -> CGFloat {
-        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
-        let actualSize = boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], context: nil)
-        return actualSize.height
-    }
-}
-
-extension String {
-    
-    subscript (i: Int) -> Character {
-        return self[self.characters.index(self.startIndex, offsetBy: i)]
-    }
-    
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
-    }
-
-}
 
 extension Int {
     func toString() -> String? {
@@ -140,40 +121,6 @@ extension String {
     
 }
 
-extension UIView {
-    
-    // OUTPUT 1
-    func dropShadow(scale: Bool = true) {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.5
-        self.layer.shadowOffset = CGSize(width: 0, height: 1)
-        self.layer.shadowRadius = 3.0
-        
-//        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-//        self.layer.shouldRasterize = true
-//        self.layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-    }
-    
-    public func setCornerRadiusForView(_ radius:Int) {
-        
-        self.layoutIfNeeded()
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = CGFloat(radius)
-        
-    }
-    
-    func fadeTransition(_ duration:CFTimeInterval) {
-        let animation = CATransition()
-        animation.timingFunction = CAMediaTimingFunction(name:
-            CAMediaTimingFunctionName.easeInEaseOut)
-        animation.type = CATransitionType.fade
-        animation.duration = duration
-        layer.add(animation, forKey: CATransitionType.fade.rawValue)
-    }
-}
-
-
 extension UIViewController {
     
     func isUIViewControllerPresentedAsModal() -> Bool {
@@ -196,39 +143,6 @@ extension UIViewController {
         return false
     }
 }
-
-
-extension UIImageView {
-    
-    
-    func setImageWithPlaceholder(string: String,placeholder:UIImage = UIImage.init(named: "no_data")!) {
-        if let url = URL(string: string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!) {
-            
-            self.af_setImage(withURL: url, placeholderImage: placeholder, filter: nil, progress: nil, progressQueue: DispatchQueue.global(), imageTransition: UIImageView.ImageTransition.noTransition, runImageTransitionIfCached: false, completion: nil)
-            
-        } else {
-            self.image = placeholder
-        }
-    }
-}
-
-extension UIScreen {
-    
-    enum SizeType: CGFloat {
-        case unknown = 0.0
-        case iPhone4 = 960.0
-        case iPhone5 = 1136.0
-        case iPhone6 = 1334.0
-        case iPhone6Plus = 1920.0
-    }
-    
-    var sizeType: SizeType {
-        let height = nativeBounds.height
-        guard let sizeType = SizeType(rawValue: height) else { return .unknown }
-        return sizeType
-    }
-}
-
 
 extension UIColor {
     
@@ -311,150 +225,6 @@ extension Array {
     }
     
     
-}
-
-extension NSDictionary{
-    
-    func getDoubleValue(key: String) -> Double{
-        
-        if let any: AnyObject = self.object(forKey: key) as AnyObject?{
-            if let number = any as? NSNumber{
-                return number.doubleValue
-            }else if let str = any as? NSString{
-                return str.doubleValue
-            }
-        }
-        return 0
-    }
-    
-    func getFloatValue(key: String) -> Float{
-        
-        if let any: AnyObject = self.object(forKey: key) as AnyObject? {
-            if let number = any as? NSNumber{
-                return number.floatValue
-            }else if let str = any as? NSString{
-                return str.floatValue
-            }
-        }
-        return 0
-    }
-    
-    func getIntValue(key: String) -> Int{
-        
-        if let any: Any = self.object(forKey: key) as Any? {
-            if let number = any as? NSNumber{
-                return number.intValue
-            }else if let str = any as? NSString{
-                return str.integerValue
-            }
-        }
-        return 0
-    }
-    
-    func getInt64Value(key: String) -> Int64{
-        
-        if let any: Any = self.object(forKey: key) as Any? {
-            if let number = any as? NSNumber{
-                return number.int64Value
-            }else if let str = any as? NSString{
-                return Int64(str as String)!
-            }
-        }
-        return 0
-    }
-    
-    
-    func getStringValue(key: String) -> String{
-        
-        if let any: AnyObject = self.object(forKey: key) as AnyObject? {
-            if let number = any as? NSNumber{
-                return number.stringValue
-            }else if let str = any as? String{
-                return str
-            }
-        }
-        return ""
-    }
-    
-    func getBooleanValue(key: String) -> Bool {
-        
-        if let any:AnyObject = self.object(forKey: key) as AnyObject? {
-            if let num = any as? NSNumber {
-                return num.boolValue
-            } else if let str = any as? NSString {
-                return str.boolValue
-            }
-        }
-        return false
-    }
-    
-    func getStringArrayValue(key: String) -> [String]{
-        
-        if let any:AnyObject = self.object(forKey: key) as AnyObject? {
-            if let ary = any as? [String] {
-                return ary
-            }
-        }
-        return []
-    }
-    
-    func getStringDictionaryValue(key : String) -> NSDictionary {
-        if let any:AnyObject = self.object(forKey: key) as AnyObject? {
-            if let ary = any as? NSDictionary {
-                return ary
-            }
-        }
-        return [:]
-    }
-    
-    func getArrayValue(key : String) -> NSArray {
-        if let any:AnyObject = self.object(forKey: key) as AnyObject? {
-            if let ary = any as? NSArray {
-                return ary
-            }
-        }
-        return []
-    }
-    
-}
-
-extension Dictionary {
-    
-    public var toJsonString: String?{
-        return NSString(data:try! JSONSerialization.data(withJSONObject: self as AnyObject, options: JSONSerialization.WritingOptions.prettyPrinted), encoding:String.Encoding.utf8.rawValue) as String?
-        
-    }
-    
-}
-
-extension UIView {
-    func roundCorners(_ corners:UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-    
-    func fadeIn(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.alpha = 1.0
-            }, completion: completion)  }
-    
-    func fadeOut(_ duration: TimeInterval = 1.0, delay: TimeInterval = 0.0, completion: @escaping (Bool) -> Void = {(finished: Bool) -> Void in}) {
-        UIView.animate(withDuration: duration, delay: delay, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            self.alpha = 0.0
-            }, completion: completion)
-    }
-
-    func setBorderWithColor(_ width:Int, colorName:UIColor) {
-        
-        self.layoutIfNeeded()
-        self.layer.borderWidth = CGFloat(width)
-        self.layer.masksToBounds = true
-        self.layer.borderColor = colorName.cgColor
-        
-    }
-
 }
 
 extension UIStoryboard {
