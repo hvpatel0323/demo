@@ -28,7 +28,7 @@ struct APPERRORMESSAGES {
 
 //MARK:- Application Themecolors
 public struct ThemeColors {
-    static let colorPrimaryLightGreen = UIColor(hex: "#47e4cc")
+    static let colorPrimaryLightGreen = UIColor.init(red: 71/255, green: 228/255, blue: 204/255, alpha: 1.0)
 }
 
 

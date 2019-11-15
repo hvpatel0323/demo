@@ -120,7 +120,7 @@ class HomeViewController: UIViewController {
                     }
                     self.tblList.reloadData()
                     
-                    if(self.refreshControl != nil && self.refreshControl.isRefreshing == true)
+                    if(self.refreshControl.isRefreshing == true)
                     {
                         self.refreshControl.endRefreshing()
                     }

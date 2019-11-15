@@ -29,9 +29,16 @@ var window: UIWindow?
             navigationBarAppearace.barTintColor = ThemeColors.colorPrimaryLightGreen
             
         
-            let objHome = UIStoryboard.main.instantiateViewController(identifier: "navVC") as! UINavigationController
+            if #available(iOS 13.0, *) {
+                let objHome = UIStoryboard.main.instantiateViewController(identifier: "navVC") as! UINavigationController
+                appDelegate.window?.rootViewController = objHome
+            } else {
+                // Fallback on earlier versions
+                let objHome = UIStoryboard.main.instantiateViewController(withIdentifier: "navVC") as! UINavigationController
+                appDelegate.window?.rootViewController = objHome
+            }
             
-            appDelegate.window?.rootViewController = objHome
+            
          
             
         }
@@ -62,9 +69,7 @@ var window: UIWindow?
 
     func startAnimation(withMessage: String = "") {
         SVProgressHUD.show()
-        if withMessage.isBlank == false {
-            SVProgressHUD.setStatus(withMessage)
-        }
+        
         
     }
     

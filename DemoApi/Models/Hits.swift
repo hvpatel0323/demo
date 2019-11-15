@@ -10,16 +10,16 @@ import SwiftyJSON
 class Hits : NSObject, NSCoding{
 
     var author : String!
-    var commentText : AnyObject!
+    var commentText : String!
     var createdAt : String!
     var createdAtI : Int!
     var numComments : Int!
-    var parentId : AnyObject!
+    var parentId : String!
     var points : Int!
-    var storyId : AnyObject!
-    var storyText : AnyObject!
-    var storyTitle : AnyObject!
-    var storyUrl : AnyObject!
+    var storyId : String!
+    var storyText : String!
+    var storyTitle : String!
+    var storyUrl : String!
     var title : String!
     var url : String!
 
@@ -31,16 +31,16 @@ class Hits : NSObject, NSCoding{
 			return
 		}
         author = json["author"].stringValue
-        commentText = json["comment_text"] as AnyObject
+        commentText = json["comment_text"].stringValue
         createdAt = json["created_at"].stringValue
         createdAtI = json["created_at_i"].intValue
         numComments = json["num_comments"].intValue
-        parentId = json["parent_id"] as AnyObject
+        parentId = json["parent_id"].stringValue
         points = json["points"].intValue
-        storyId = json["story_id"] as AnyObject
-        storyText = json["story_text"] as AnyObject
-        storyTitle = json["story_title"] as AnyObject
-        storyUrl = json["story_url"] as AnyObject
+        storyId = json["story_id"].stringValue
+        storyText = json["story_text"].stringValue
+        storyTitle = json["story_title"].stringValue
+        storyUrl = json["story_url"].stringValue
         title = json["title"].stringValue
         url = json["url"].stringValue
 	}
@@ -100,16 +100,16 @@ class Hits : NSObject, NSCoding{
     @objc required init(coder aDecoder: NSCoder)
 	{
 		author = aDecoder.decodeObject(forKey: "author") as? String
-		commentText = aDecoder.decodeObject(forKey: "comment_text") as? AnyObject
+		commentText = aDecoder.decodeObject(forKey: "comment_text") as? String
 		createdAt = aDecoder.decodeObject(forKey: "created_at") as? String
 		createdAtI = aDecoder.decodeObject(forKey: "created_at_i") as? Int
 		numComments = aDecoder.decodeObject(forKey: "num_comments") as? Int
-		parentId = aDecoder.decodeObject(forKey: "parent_id") as? AnyObject
+		parentId = aDecoder.decodeObject(forKey: "parent_id") as? String
 		points = aDecoder.decodeObject(forKey: "points") as? Int
-		storyId = aDecoder.decodeObject(forKey: "story_id") as? AnyObject
-		storyText = aDecoder.decodeObject(forKey: "story_text") as? AnyObject
-		storyTitle = aDecoder.decodeObject(forKey: "story_title") as? AnyObject
-		storyUrl = aDecoder.decodeObject(forKey: "story_url") as? AnyObject
+		storyId = aDecoder.decodeObject(forKey: "story_id") as? String
+		storyText = aDecoder.decodeObject(forKey: "story_text") as? String
+		storyTitle = aDecoder.decodeObject(forKey: "story_title") as? String
+		storyUrl = aDecoder.decodeObject(forKey: "story_url") as? String
 		title = aDecoder.decodeObject(forKey: "title") as? String
 		url = aDecoder.decodeObject(forKey: "url") as? String
 	}
